@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
+import { Link } from 'react-router-dom';
 
 const address = '';
 
@@ -10,7 +11,7 @@ async function checkLoginData(cred){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(cred)
-    }).then(data => data.json())
+    }).then(data => data.json());
 }
 
 function Login(){
@@ -25,9 +26,9 @@ function Login(){
             loginUsername,
             hashedPassword
         });
-        if('accessToken' in response) {
+        if('token' in response) {
             //success message
-            localStorage.setItem("accessToken", response['accessToken']);
+            localStorage.setItem("token", response['token']);
             localStorage.setItem('user', JSON.stringify(response['user']));
             window.location.href = "/pages/home";
             setIsSubmitted(true);
@@ -49,6 +50,9 @@ function Login(){
                 </div>
                 <div className="loginButton">
                     <input type="submit" name="loginSubmit" value="Zaloguj"/>
+                </div>
+                <div>
+                    <Link to="/register">Zarejestruj sie!</Link>
                 </div>
             </form>
         </div>
