@@ -114,3 +114,7 @@
 .registerButton {
   text-align: center;
 }
+
+.registerWrongPassword {
+  color: red;
+}

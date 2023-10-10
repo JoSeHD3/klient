@@ -80,7 +80,7 @@ function Register(){
                     
                 </div>
                 <div>
-                    <label name="registerWrongPassword">{registerWrongPassword}</label>
+                    <label className="registerWrongPassword">{registerWrongPassword}</label>
                 </div>
                 <div className="registerButton">
                     <input type="submit" name="registerSubmit" value="Zarejestruj"/>
