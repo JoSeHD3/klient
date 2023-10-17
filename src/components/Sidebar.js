@@ -1,7 +1,7 @@
 import React from "react";
 import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faBriefcase, faHome, faLightbulb, faUniversalAccess } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -11,33 +11,67 @@ function Sidebar(){
 
     const {setMarginLeft} = useMargin();
 
+    const sidebarStyle = {
+        background: '#555555',
+        color: '#fff',
+    };
+
+    const iconStyle = {
+        color: '#fff',
+        fontSize: '1.75em'
+    };
+
     return (
-        <SideNav onSelect={(selected) => {
+        <SideNav style={sidebarStyle} onSelect={(selected) => {
             const to = '/' + selected;
             window.location.href = to;
         }}
             onToggle= {(expanded) => {
                 setMarginLeft(expanded ? '240px' : '64px');
             }}>
-            <SideNav.Toggle />
-            <SideNav.Nav defaultSelected="">
+            <Toggle />
+            <Nav defaultSelected="">
                 <NavItem eventKey="">
                     <NavIcon>
-                        <FontAwesomeIcon icon={faHome} style={{fontSize: "1.75em"}}/>
+                        <FontAwesomeIcon icon={faHome} style={iconStyle}/>
                     </NavIcon>
                     <NavText>
-                        Home
+                        Strona główna
                     </NavText>
                 </NavItem>
-                <NavItem eventKey="pages/Test">
+                <NavItem eventKey="pages/Profile">
                     <NavIcon>
-                        <FontAwesomeIcon icon={faUser} style={{fontSize: "1.75em"}}/>
+                        <FontAwesomeIcon icon={faUser} style={iconStyle}/>
                     </NavIcon>
                     <NavText>
-                        Profile
+                        Profil
                     </NavText>
                 </NavItem>
-            </SideNav.Nav>
+                <NavItem eventKey="pages/Firm">
+                    <NavIcon>
+                        <FontAwesomeIcon icon={faUniversalAccess} style={iconStyle}/>
+                    </NavIcon>
+                    <NavText>
+                        Firma
+                    </NavText>
+                </NavItem>
+                <NavItem eventKey="pages/Commision">
+                    <NavIcon>
+                        <FontAwesomeIcon icon={faBriefcase} style={iconStyle}/>
+                    </NavIcon>
+                    <NavText>
+                        Zlecenie
+                    </NavText>
+                </NavItem>
+                <NavItem eventKey="pages/Help">
+                    <NavIcon>
+                        <FontAwesomeIcon icon={faLightbulb} style={iconStyle}/>
+                    </NavIcon>
+                    <NavText>
+                        Pomoc
+                    </NavText>
+                </NavItem>
+            </Nav>
 
         </SideNav>
     );

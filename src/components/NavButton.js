@@ -1,12 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 
 function OneButton(props){
+
+    const handleClick = () => {
+        window.location.href = props.route;
+    };
+
     return (
-        <div className="col-top-nav">
-            <Link to={props.route} >{props.name}</Link>
-        </div>
+        <button className = "col-top-nav" onClick={handleClick}>
+            {props.name}
+        </button>
     );
 }
 
@@ -16,7 +19,7 @@ function NavButton(props){
     ));
 
     return (
-        <div>
+        <div className="top-nav">
             {buttons}
         </div>
     );

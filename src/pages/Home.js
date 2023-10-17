@@ -8,8 +8,8 @@ function Home(){
 
     return(
         <div className="site-first-div" style={{marginLeft}}>
-            <NavButton className="top-nav" routes={[{route: '/pages/Test', name: 'Test'}, {route: '/pages/Home', name: 'Home'}]}/>
-            Home Page
+            <NavButton routes={[{route: '/pages/Home', name: 'Strona główna'}]}/>
+            
         </div>
     );
 }

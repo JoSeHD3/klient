@@ -19,21 +19,20 @@ function Login(){
     const [loginUsername, setLoginUsername] = useState();
     const [loginPassword, setLoginPassword] = useState();
 
-    const handleSubmit = async e => {        //prevent from submit default action
+    const handleSubmit = async e => {        
         e.preventDefault();
-        let hashedPassword = bcrypt.hashSync(loginPassword, 10);
         const response = await checkLoginData({
             loginUsername,
             hashedPassword
         });
         if('token' in response) {
-            //success message
             localStorage.setItem("token", response['token']);
             localStorage.setItem('user', JSON.stringify(response['user']));
             window.location.href = "/pages/home";
             setIsSubmitted(true);
         } else {
-            //error message
+            console.log("Server response error");
+            window.location.href = "/pages/ErrorSite";
         }
     }
 

@@ -9,7 +9,7 @@ function Test(){
 
     return (
         <div className="site-first-div" style={{marginLeft}}>
-            <NavButton className="top-nav" routes={[{route: '/pages/Test', name: 'Test'}, {route: '/pages/Home', name: 'Home'}]}/>
+            <NavButton className="top-nav" routes={[{route: '/pages/Home', name: 'Strona główna'}, {route: '/pages/Test', name: 'Test'}]}/>
             Test Succeded
         </div>
     );
