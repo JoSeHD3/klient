@@ -118,3 +118,7 @@
 .registerWrongPassword {
   color: red;
 }
+
+.site-first-div {
+  margin-left: 64px;
+}
