@@ -23,7 +23,7 @@ function Login(){
         e.preventDefault();
         const response = await checkLoginData({
             loginUsername,
-            hashedPassword
+            loginPassword
         });
         if('token' in response) {
             localStorage.setItem("token", response['token']);

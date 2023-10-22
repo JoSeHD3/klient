@@ -12,8 +12,8 @@ import Sidebar from './components/Sidebar';
 import {MarginProvider} from './components/MarginContext';
 
 function App() {
-    //const token = localStorage.getItem('accessToken');
-    const token = ".";
+    const token = localStorage.getItem('accessToken');
+    //const token = ".";
 
     return (
         <div className="app">
