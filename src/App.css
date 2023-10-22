@@ -140,3 +140,27 @@
   height: 100%;
   width: 100%;
 }
+
+.profileButtonBox {
+  position: relative;
+  margin-top: 20%;
+  margin-left: 15%;
+  text-align: center;
+}
+
+.profileButton {
+  height: 150px;
+  width: 300px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 14px;
+  background: #555555;
+  border: 1px solid black;
+  font-family: 'Arial';
+  font-size: large;
+  color: #cfcfcf;
+  margin-right: 200px;
+}
+
