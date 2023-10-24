@@ -8,6 +8,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ErrorSite from './pages/ErrorSite';
 import Profile from './pages/Profile';
+import ChangeData from './pages/ChangeData';
+import CommissionsHistory from './pages/CommissionsHistory';
+import DeactivateAccount from './pages/DeactivateAccount';
 import "./components/Fontawesome";
 import Sidebar from './components/Sidebar';
 import {MarginProvider} from './components/MarginContext';
@@ -31,6 +34,9 @@ function App() {
                                     <Route path="/pages/test" element={token ? <Test /> : <Login />} />
                                     <Route path="/register" element={!token ? <Register /> : <Home />}/>
                                     <Route path="/pages/profile" element={token ? <Profile /> : <Login />} />
+                                    <Route path="/pages/profile/changedata" element={token ? <ChangeData /> : <Login />} />
+                                    <Route path="/pages/profile/commissionshistory" element={token ? <CommissionsHistory /> : <Login />} />
+                                    <Route path="/pages/profile/deactivateaccount" element={token ? <DeactivateAccount /> : <Login />} />
                                     
                                     <Route path="*" element={<ErrorSite />}/>
                                 </Routes>

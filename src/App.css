@@ -139,6 +139,7 @@
   position: absolute;
   height: 100%;
   width: 100%;
+  overflow: auto;
 }
 
 .profileButtonBox {
@@ -164,3 +165,154 @@
   margin-right: 200px;
 }
 
+.deactivateaccount-locate {
+  position: relative;
+  margin-top: 20%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100hv;
+}
+
+.deactivateaccount-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 40%;
+}
+
+.deactivateaccount-information, .deactivateaccount-password, .deactivateaccount-submit {
+  margin: 10px;
+  text-align: center;
+}
+
+.deactivateaccount-password {
+  height: 80px;
+  width: 300px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  font-size: 14px;
+  background: #555555;
+  border: 1px solid black;
+  font-family: 'Arial';
+  font-size: large;
+  color: #ffffff;
+}
+
+.deactivateaccount-submit {
+  height: 80px;
+  width: 300px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  font-size: 14px;
+  background: #aaaaaa;
+  border: 1px solid black;
+  font-family: 'Arial';
+  font-size: large;
+  color: black;
+}
+
+.deactivateaccount-submit:hover {
+  color: #ffffff;
+  background-color: #7a7a7a;
+}
+
+
+.changedata-locate {
+  position: relative;
+  margin-top: 5%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100hv;
+}
+
+.changedata-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.changedata-name, .changedata-surname, .changedata-password, .changedata-email, .changedata-repeatpassword, .changedata-submit {
+  margin: 10px;
+  text-align: center;
+}
+
+.changedata-name, .changedata-password, .changedata-surname, .changedata-email, .changedata-repeatpassword {
+  height: 80px;
+  width: 300px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  font-size: 14px;
+  background: #555555;
+  border: 1px solid black;
+  font-family: 'Arial';
+  font-size: large;
+  color: #ffffff;
+}
+
+.changedata-submit {
+  height: 80px;
+  width: 300px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  font-size: 14px;
+  background: #aaaaaa;
+  border: 1px solid black;
+  font-family: 'Arial';
+  font-size: large;
+  color: black;
+}
+
+.changedata-submit:hover {
+  color: #ffffff;
+  background-color: #7a7a7a;
+}
+
+.commissionshistory-table-container {
+  position: relative;
+  margin: 5%;
+  margin-top: 5%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100hv;
+}
+
+.commissionshistory-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+.commissionshistory-table th, .commissionshistory-table td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.commissionshistory-table tr {
+  background: #555555;
+}
+
+.commissionshistory-table tr:nth-child(even){
+  background: #7a7a7a;
+}
