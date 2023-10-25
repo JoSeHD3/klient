@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import bcrypt from 'bcryptjs';
 
-const address = ""
+const address = "http://127.0.0.1:8086/userRegister";
 
 async function sendRegisterData(cred){
     return fetch(address, {
@@ -45,9 +45,9 @@ function Register(){
                 registerName,
                 registerSurname
             });
-            if('validate' in response) {
-                window.location.href = "/";
-            }
+            //if(response.success) {    
+            //    window.location.href = "/";
+            //}
         }
     }
 

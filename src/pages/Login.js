@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import bcrypt from 'bcryptjs';
 import { Link } from 'react-router-dom';
 
-const address = '';
+const address = "http://127.0.0.1:8086/authenticate";
 
 async function checkLoginData(cred){
     return fetch(address, {
@@ -27,7 +27,7 @@ function Login(){
         });
         if('token' in response) {
             localStorage.setItem("token", response['token']);
-            localStorage.setItem('user', JSON.stringify(response['user']));
+            //localStorage.setItem('user', JSON.stringify(response['user']));
             window.location.href = "/pages/home";
             setIsSubmitted(true);
         } else {

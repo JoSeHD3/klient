@@ -4,7 +4,7 @@ import NavButton from '../components/NavButton';
 import {useMargin} from '../components/MarginContext';
 import { useState } from 'react';
 
-const address = '';
+const address = 'http://127.0.0.1:8086/userUpdate';
 
 function ChangeData(){
     const {marginLeft} = useMargin();
@@ -34,14 +34,15 @@ function ChangeData(){
                 const response = await fetch(address, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({token, name, surname, email, password})
+                    body: JSON.stringify({name, surname, email, password})
                 });
 
                 const data = await response.json();
 
-                if(data.success) {
+                if(response.status === 200) {
                     setMessage("Pomyślnie zmieniono Twoje dane!");
 
                 } else {
