@@ -3,7 +3,7 @@ import React from 'react';
 import NavButton from '../components/NavButton';
 import {useMargin} from '../components/MarginContext';
 
-function Home(){
+function SearchCargo(){
     const {marginLeft} = useMargin();
     return(
         <div className="site-first-div" style={{marginLeft}}>
@@ -13,4 +13,4 @@ function Home(){
     );
 }
 
-export default Home;
+export default SearchCargo;

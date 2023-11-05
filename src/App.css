@@ -163,6 +163,7 @@
   font-size: large;
   color: #cfcfcf;
   margin-right: 200px;
+  margin-top: 15px;
 }
 
 .deactivateaccount-locate {
@@ -315,4 +316,79 @@
 
 .commissionshistory-table tr:nth-child(even){
   background: #7a7a7a;
+}
+
+.firmuser-locate {
+  position: relative;
+  margin-top: 15%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100hv;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]{
+  -moz-appearance: textfield;
+}
+
+.manageemployees-locate {
+  position: relative;
+  margin-top: 2%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100hv;
+}
+
+.managevehicles-locate {
+  position: relative;
+  margin-top: 2%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100hv;
+}
+
+.addtrailer-locate {
+  position: relative;
+  margin-top: 2%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100hv;
+}
+
+#odczep { 
+  vertical-align: middle;
+  margin: 0;
+}
+
+.addtrailer-odczep{
+  height: 80px;
+  width: 300px;
+  display: inline-flex;
+  margin-right: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  font-size: 14px;
+  font-family: 'Arial';
+  font-size: large;
+  margin: 10px;
+  margin-right: -120px;
+  text-align: center;
 }

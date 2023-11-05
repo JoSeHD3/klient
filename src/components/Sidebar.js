@@ -47,7 +47,7 @@ function Sidebar(){
                         Profil
                     </NavText>
                 </NavItem>
-                <NavItem eventKey="pages/Firm">
+                <NavItem eventKey="pages/Company">
                     <NavIcon>
                         <FontAwesomeIcon icon={faUniversalAccess} style={iconStyle}/>
                     </NavIcon>

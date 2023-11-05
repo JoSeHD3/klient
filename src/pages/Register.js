@@ -45,9 +45,9 @@ function Register(){
                 registerName,
                 registerSurname
             });
-            //if(response.success) {    
-            //    window.location.href = "/";
-            //}
+            if(response.validate) {    
+                window.location.href = "/";
+            }
         }
     }
 
