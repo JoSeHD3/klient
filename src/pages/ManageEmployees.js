@@ -127,7 +127,7 @@ function ManageEmployees(){
 							{employees.map((employee, index) => (
 								<tr key={index}>
 									<td>{employee.name}</td>
-									<td>{employee.name"}</td>
+									<td>{employee.surname}</td>
 									<td>
 										<select
 											value={employee.role}
