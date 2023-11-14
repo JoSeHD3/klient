@@ -7,8 +7,8 @@ import Cookies from 'js-cookie';
 function ManageEmployees(){
     const {marginLeft} = useMargin();
 
-    const addressA = '';
-    const addressB = '';
+    const addressA = 'http://127.0.0.1:8086/companyAddUser';
+    const addressB = 'http://127.0.0.1:8086/companyGetUsers';
     const addressC = '';
     const addressD = '';
     const token = localStorage.getItem('token');
@@ -24,7 +24,13 @@ function ManageEmployees(){
 
     const fetchEmployees = async () => {
         try {
-            const response = await fetch(addressB);
+            const response = await fetch(addressB, {
+                method: "GET",
+                headers: {
+                    'Content-Type' : 'application/json', 
+                    'Authorization' : 'Bearer '+ token
+                }
+            });
             if(response.ok) {
                 const data = await response.json();
                 setEmployees(data);
@@ -44,8 +50,9 @@ function ManageEmployees(){
                 method: "POST",
                 headers: {
                     'Content-Type' : 'application/json', 
+                    'Authorization' : 'Bearer '+ token
                 },
-                body: JSON.stringify({token, login})
+                body: JSON.stringify({login})
             });
             if(reponse.ok ){
                 alert("Pomyślnie dodano użytkownika do firmy");
@@ -116,23 +123,25 @@ function ManageEmployees(){
                             <th>Stanowisko</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {employees.map((employee, index) => {
-                            <tr key={index}>
-                                <td>{employee.name}</td>
-                                <td>{employee.surname}</td>
-                                <td>
-                                    <select value={employee.role}
-                                    onChange={(e) => handleRoleChange(employee, e.target.value)}>
-                                        <option value="logistician">Logistyk</option>
-                                        <option value="employee">Pracownik</option>
-                                        <option value="manager">Menadżer</option>
-                                    </select>
-                                    <button onClick={() => handleDeleteUser(employee)}>-</button>
-                                </td>
-                            </tr>
-                        })}
-                    </tbody>
+						<tbody>
+							{employees.map((employee, index) => (
+								<tr key={index}>
+									<td>{employee.login}</td>
+									<td>{"brak"}</td>
+									<td>
+										<select
+											value={employee.role}
+											onChange={(e) => handleRoleChange(employee, e.target.value)}
+										>
+											<option value="logistician">Logistyk</option>
+											<option value="employee">Pracownik</option>
+											<option value="manager">Menadżer</option>
+										</select>
+										<button onClick={() => handleDeleteUser(employee)}>-</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
                 </table>
                 </div>
             </div>

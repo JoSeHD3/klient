@@ -27,8 +27,8 @@ import AnnounceRide from './pages/AnnounceRide';
 import SearchCargo from './pages/SearchCargo';
 
 function App() {
-    //const token = localStorage.getItem('token');
-    const token = ".";
+    const token = localStorage.getItem('token');
+    //const token = ".";
     const addressRole = "";
     const [updateUser, setUpdateUser] = useState(true);    //hook for forcing app to change user's role without reloading site
 

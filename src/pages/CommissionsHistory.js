@@ -5,7 +5,7 @@ import {useMargin} from '../components/MarginContext';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const address = '';
+const address = 'http://127.0.0.1:8086/getUserCommissions';
 
 function CommissionsHistory(){
     const {marginLeft} = useMargin();
@@ -17,13 +17,12 @@ function CommissionsHistory(){
 
             try {
                 const respone = await fetch(address, {
-                    method: 'POST',
+                    method: 'GET',
                     headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({token})
+                        'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`
+                    }
                 });
-
                 const res = await respone.json();
 
                 setData(res);
@@ -48,13 +47,17 @@ function CommissionsHistory(){
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(item => {
+                        {data.map(item => (
                             <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td>{item.name}</td>
-                                <td>{item.status}</td>
+                                <td>{item.commission_id}</td>
+                                <td>{item.description}</td>
+                                <td>
+									{item.is_unloaded && !item.is_loaded ? 'zakończone' :
+									!item.is_unloaded && item.is_loaded ? 'w podróży' :
+									'oczekujące'}
+								</td>
                             </tr>
-                        })}
+                        ))}
                     </tbody>
                 </table>
             </div>
@@ -63,3 +66,4 @@ function CommissionsHistory(){
 }
 
 export default CommissionsHistory;
+
