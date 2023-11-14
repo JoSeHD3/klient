@@ -126,8 +126,8 @@ function ManageEmployees(){
 						<tbody>
 							{employees.map((employee, index) => (
 								<tr key={index}>
-									<td>{employee.login}</td>
-									<td>{"brak"}</td>
+									<td>{employee.name}</td>
+									<td>{employee.name"}</td>
 									<td>
 										<select
 											value={employee.role}
