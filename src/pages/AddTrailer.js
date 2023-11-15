@@ -24,8 +24,9 @@ function AddTrailer(){
                 method: 'POST',
                 header: {
                     'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${token}`
                 },
-                body: JSON.stringify({token, width, height, volume, maxMass, mass, dismount}),
+                body: JSON.stringify({width, height, volume, maxMass, mass, dismount}),
             });
 
             if(response.ok){
@@ -40,7 +41,7 @@ function AddTrailer(){
     return(
         <div className="site-first-div" style={{marginLeft}}>
             <NavButton routes={[{route: '/pages/Home', name: 'Strona główna'}, {route: '/pages/Company', name: 'Firma'}, {route: '/pages/Company/ManageVehicles', name: 'Zarządzaj pojazdami'}, {route: '/pages/Company/AddVehicle', name: 'Dodaj Pojazd'}]}/>
-            {(role === 'manager' || role === 'logistician') ? 
+            {(role === 'manager' || role === 'logistyk') ? 
             <div className='addtrailer-locate'>
                 <form onSubmit={handleSubmit} className='deactivateaccount-form'>
                     <input className='deactivateaccount-password' type='number' required placeholder='SZEROKOŚĆ' onChange={e => setWidth(e.target.value)}></input>

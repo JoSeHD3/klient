@@ -20,9 +20,10 @@ function DeactivateAccount(){
             const response = await fetch(address, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${token}`
                 },
-                body: JSON.stringify({token, password})
+                body: JSON.stringify({password})
             });
 
             const data = await response.json();

@@ -16,9 +16,9 @@ function RoutesList(){
                 const respone = await fetch(address, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization' : `Bearer ${token}`
                     },
-                    body: JSON.stringify({token})
                 });
 
                 const res = await respone.json();

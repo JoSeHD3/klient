@@ -19,8 +19,9 @@ function DeleteCompany(){
                 method: 'POST',
                 header: {
                     'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${token}`
                 },
-                body: JSON.stringify({token, nip}),
+                body: JSON.stringify({nip}),
             });
 
             if(response.ok){

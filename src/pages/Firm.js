@@ -15,9 +15,9 @@ function Firm(){
     return(
         <div className="site-first-div" style={{marginLeft}}>
             <NavButton routes={[{route: '/pages/Home', name: 'Strona główna'}, {route: '/pages/Firm', name: 'Firma'}]}/>
-            {role === 'logistician' ? <FirmLogistician/>: ""}
+            {role === 'logistyk' ? <FirmLogistician/>: ""}
             {role === 'manager' ? <FirmManager/>: ""}
-            {role !== 'manager' && role !== 'logistician' ? <FirmUser/>:""}
+            {role !== 'manager' && role !== 'logistyk' ? <FirmUser/>:""}
         </div>
     );
 }

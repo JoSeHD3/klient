@@ -18,9 +18,9 @@ function ManageVehicles(){
                 const respone = await fetch(address, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization' : `Bearer ${token}`
                     },
-                    body: JSON.stringify({token})
                 });
 
                 const res = await respone.json();
@@ -45,7 +45,7 @@ function ManageVehicles(){
     return(
         <div className="site-first-div" style={{marginLeft}}>
             <NavButton routes={[{route: '/pages/Home', name: 'Strona główna'}, {route: '/pages/Company', name: 'Firma'}, {route: '/pages/Company/ManageVehicles', name: 'Zarządzaj pojazdami'}]}/>
-            {(role === 'manager' || role === 'logistician') ? 
+            {(role === 'manager' || role === 'logistyk') ? 
             <div>
                 <div className='managevehicles-locate'>
                     <button className='deactivateaccount-submit' onClick={handleAddVehicleButton}>Dodaj pojazd</button>

@@ -28,7 +28,7 @@ function ManageEmployees(){
                 method: "GET",
                 headers: {
                     'Content-Type' : 'application/json', 
-                    'Authorization' : 'Bearer '+ token
+                    'Authorization' : 'Bearer ' + token
                 }
             });
             if(response.ok) {
@@ -71,8 +71,9 @@ function ManageEmployees(){
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json',
+                    'Authorization' : 'Bearer ' + token
                 },
-                body: JSON.stringify({token: token, name: employee.name, surname: employee.surname, role: newRole}),
+                body: JSON.stringify({name: employee.name, surname: employee.surname, role: newRole}),
             });
 
             if(response.ok){
@@ -91,8 +92,9 @@ function ManageEmployees(){
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization' : 'Bearer ' + token
                 },
-                body: JSON.stringify({token: token, name: employee.name, surname: employee.surname})
+                body: JSON.stringify({name: employee.name, surname: employee.surname})
             });
 
             if(response.ok){
@@ -133,8 +135,8 @@ function ManageEmployees(){
 											value={employee.role}
 											onChange={(e) => handleRoleChange(employee, e.target.value)}
 										>
-											<option value="logistician">Logistyk</option>
-											<option value="employee">Pracownik</option>
+											<option value="logistyk">Logistyk</option>
+											<option value="pracownik">Pracownik</option>
 											<option value="manager">Menadżer</option>
 										</select>
 										<button onClick={() => handleDeleteUser(employee)}>-</button>

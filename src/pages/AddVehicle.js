@@ -21,8 +21,9 @@ function AddVehicle(){
                 method: 'POST',
                 header: {
                     'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${token}`
                 },
-                body: JSON.stringify({token, model, mass, licensePlate}),
+                body: JSON.stringify({model, mass, licensePlate}),
             });
 
             if(response.ok){
@@ -37,7 +38,7 @@ function AddVehicle(){
     return(
         <div className="site-first-div" style={{marginLeft}}>
             <NavButton routes={[{route: '/pages/Home', name: 'Strona główna'}, {route: '/pages/Company', name: 'Firma'}, {route: '/pages/Company/ManageVehicles', name: 'Zarządzaj pojazdami'}, {route: '/pages/Company/AddVehicle', name: 'Dodaj Pojazd'}]}/>
-            {(role === 'manager' || role === 'logistician') ? 
+            {(role === 'manager' || role === 'logistyk') ? 
             <div className='firmuser-locate'>
                 <form onSubmit={handleSubmit} className='deactivateaccount-form'>
                     <input className='deactivateaccount-password' type='text' required placeholder='MODEL' onChange={e => setModel(e.target.value)}></input>

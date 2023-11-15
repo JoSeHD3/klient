@@ -25,10 +25,11 @@ import AddVehicle from './pages/AddVehicle';
 import RoutesList from './pages/RoutesList';
 import AnnounceRide from './pages/AnnounceRide';
 import SearchCargo from './pages/SearchCargo';
+import Commissions from './pages/Commissions';
 
 function App() {
-    const token = localStorage.getItem('token');
-    //const token = ".";
+    //const token = localStorage.getItem('token');
+    const token = ".";
     const addressRole = "";
     const [updateUser, setUpdateUser] = useState(true);    //hook for forcing app to change user's role without reloading site
 
@@ -88,6 +89,7 @@ function App() {
                                     <Route path="/pages/company/routeslist" element={token ? <RoutesList /> : <Login />} />
                                     <Route path="/pages/company/announceride" element={token ? <AnnounceRide /> : <Login />} />
                                     <Route path="/pages/company/searchcargo" element={token ? <SearchCargo /> : <Login />} />
+                                    <Route path="/pages/commision" element={token ? <Commissions /> : <Login />} />
 
                                     <Route path="*" element={<ErrorSite />}/>
                                 </Routes>
