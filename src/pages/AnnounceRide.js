@@ -110,8 +110,11 @@ function AnnounceRide() {
         ]}
       />
       {(role === 'manager' || role === 'logistyk') ? (
-        <div className="addtrailer-locate">
+        <div className="announceride-locate">
+          
           <form onSubmit={handleSubmit} className="deactivateaccount-form">
+          <div className='announceride-row'>
+          <div className='announceride-column'>
             <input
               type="text"
               placeholder="Nazwa przejazdu"
@@ -152,6 +155,8 @@ function AnnounceRide() {
               value={rideData.gpsY}
               onChange={handleInputChange}
             />
+            </div>
+            <div className='announceride-row'>
             <input
               type="text"
               placeholder="Adres"
@@ -189,13 +194,15 @@ function AnnounceRide() {
 				</option>
 			  ))}
 			</select>
-            <textarea
+            <input
+            type="text"
               name="description"
               placeholder="Opis"
               className="deactivateaccount-password"
               value={rideData.description}
               onChange={handleInputChange}
             />
+            </div></div>
             <input
               className="deactivateaccount-submit"
               type="submit"

@@ -112,12 +112,19 @@ function SearchCargo(){
 
     return(
         <div className="site-first-div" style={{marginLeft}}>
-            <NavButton routes={[{route: '/pages/Home', name: 'Strona główna'}]}/>
+            <NavButton         routes={[
+          { route: '/pages/Home', name: 'Strona główna' },
+          { route: '/pages/Company', name: 'Firma' },
+          {
+            route: '/pages/Company/ManageCommissions',
+            name: 'Zarządzaj zleceniami',
+          },
+          { route: '/pages/Company/SearchCargo', name: 'Wyszukaj ładunek' },
+        ]}/>
             {(role === 'manager' || role === 'logistyk') ? 
-            <div>
-                <label>
-                    Wybierz Przejazd:
-                    <select value={routes.id} onChange={(e) => setSelectedRoute(e.target.value)}>
+            <div className="commissionshistory-table-container">
+            
+                    <select className="deactivateaccount-password" value={routes.id} onChange={(e) => setSelectedRoute(e.target.value)}>
                         <option value="">Wybierz przejazd</option>
                         {routes.map(routes => (
                             <option  value={routes.id}>
@@ -125,36 +132,34 @@ function SearchCargo(){
                             </option>
                         ))}
                     </select>
-                </label>
-                <label>
-
-                </label>
-                <button onClick={handleAddButtonClick}>Dodaj</button>
-                <table className="commissionshistory-table">
-                    <thead>
-                        <tr>
-                            <th>ID paczki</th>
-                            <th>Nazwa</th>
-                            <th>Zaznacz</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {packageData.map(packageItem => (
-                            <tr key={packageItem.commission_id}>
-                                <td>{packageItem.commission_id}</td>
-                                <td>{packageItem.description}</td>
-                                <td>
-                                    <input 
-                                        type="checkbox"
-                                         checked={selectedPackages.includes(packageItem.commission_id)}
-                                        onChange={() => handlePackageCheckboxChange(packageItem.commission_id)}
-                                    />
-                                </td>
+                <button className="deactivateaccount-submit" onClick={handleAddButtonClick}>Dodaj</button>
+                <p />
+                    <table className="commissionshistory-table">
+                        <thead>
+                            <tr>
+                                <th>ID paczki</th>
+                                <th>Nazwa</th>
+                                <th>Zaznacz</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {packageData.map(packageItem => (
+                                <tr key={packageItem.commission_id}>
+                                    <td>{packageItem.commission_id}</td>
+                                    <td>{packageItem.description}</td>
+                                    <td>
+                                        <input 
+                                            type="checkbox"
+                                            checked={selectedPackages.includes(packageItem.commission_id)}
+                                            onChange={() => handlePackageCheckboxChange(packageItem.commission_id)}
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            
             : '' }
         </div>
     );

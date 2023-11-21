@@ -82,105 +82,72 @@ function Commissions(){
 
     return (
         <div className="site-first-div" style={{marginLeft}}>
-            <NavButton className="top-nav" routes={[{route: '/pages/Home', name: 'Strona główna'}, {route: '/pages/Test', name: 'Test'}]}/>
+            <NavButton className="top-nav" routes={[{route: '/pages/Home', name: 'Strona główna'}, {route: '/pages/Commision', name: 'Zlecenie'}]}/>
+            <div className="commissions-locate">
             <form>
-                <fieldset>
-                <legend>Punkt początkowy</legend>
-                <label>
-                kod pocztowy:
-                <input type="text" value={zipCodeStart} onChange={(e) => setZipCodeStart(e.target.value)} />
-                </label>
+                <div className='commissions-row'>
+                    <fieldset>
+                <div className='commissions-column'>
+                <legend className='commissions-label'>Punkt początkowy</legend>
+                
+                <input placeholder="Kod pocztowy" className="deactivateaccount-password" type="text" value={zipCodeStart} onChange={(e) => setZipCodeStart(e.target.value)} />
 
-                <label>
-                Numer domu:
-                <input type="text" value={houseNumberStart} onChange={(e) => setHouseNumberStart(e.target.value)} />
-                </label>
+                
+                <input placeholder='Numer domu' className="deactivateaccount-password" type="text" value={houseNumberStart} onChange={(e) => setHouseNumberStart(e.target.value)} />
 
-                <label>
-                X:
-                <input type="number" step="0.001" value={gpsXStart} onChange={(e) => setGPSXStart(parseFloat(e.target.value))} />
-                </label>
+                
+                <input placeholder='X' className="deactivateaccount-password" type="number" step="0.001" value={gpsXStart} onChange={(e) => setGPSXStart(parseFloat(e.target.value))} />
 
-                <label>
-                Y:
-                <input type="number" step="0.001" value={gpsYStart} onChange={(e) => setGPSYStart(parseFloat(e.target.value))} />
-                </label>
-                <label>
-                Adres:
-                <input type="text" value={addressStart} onChange={(e) => setAddressStart(e.target.value)} />
-                </label>
-                </fieldset>
-                <fieldset>
-                <legend>Punkt koncowy</legend>
-                <label>
-                Kod pocztowy:
-                <input type="text" value={zipCodeEnd} onChange={(e) => setZipCodeEnd(e.target.value)} />
-                </label>
+                
+                <input placeholder="Y" className="deactivateaccount-password" type="number" step="0.001" value={gpsYStart} onChange={(e) => setGPSYStart(parseFloat(e.target.value))} />
+                
+                <input placeholder='Adres' className="deactivateaccount-password" type="text" value={addressStart} onChange={(e) => setAddressStart(e.target.value)} />
+                </div></fieldset><fieldset>
+                <div className='commissions-column'>
+                <legend className='commissions-label'>Punkt koncowy</legend>
+                <input placeholder="Kod pocztowy" className="deactivateaccount-password" type="text" value={zipCodeEnd} onChange={(e) => setZipCodeEnd(e.target.value)} />
 
-                <label>
-                Numer domu:
-                <input type="text" value={houseNumberEnd} onChange={(e) => setHouseNumberEnd(e.target.value)} />
-                </label>
+                <input placeholder='Numer domu' className="deactivateaccount-password" type="text" value={houseNumberEnd} onChange={(e) => setHouseNumberEnd(e.target.value)} />
 
-                <label>
-                X:
-                <input type="number" step="0.001" value={gpsXEnd} onChange={(e) => setGPSXEnd(parseFloat(e.target.value))} />
-                </label>
+                <input placeholder='X' className="deactivateaccount-password" type="number" step="0.001" value={gpsXEnd} onChange={(e) => setGPSXEnd(parseFloat(e.target.value))} />
 
-                <label>
-                Y:
-                <input type="number" step="0.001" value={gpsYEnd} onChange={(e) => setGPSYEnd(parseFloat(e.target.value))} />
-                </label>
+                <input placeholder="Y" className="deactivateaccount-password" type="number" step="0.001" value={gpsYEnd} onChange={(e) => setGPSYEnd(parseFloat(e.target.value))} />
 
-                <label>
-                Adres:
-                <input type="text" value={addressEnd} onChange={(e) => setAddressEnd(e.target.value)} />
-                </label>
-                </fieldset>
+                <input placeholder='Adres' className="deactivateaccount-password" type="text" value={addressEnd} onChange={(e) => setAddressEnd(e.target.value)} />
+                </div></fieldset><fieldset>
 
-                <fieldset>
-                <legend>Paczka
+                <div className='commissions-column2'>
+
+                <legend className='commissions-label'>Paczka
                 </legend>
-                <label>
-                Description:
-                <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-                </label>
+                <input placeholder='Opis' className="deactivateaccount-password" type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
 
-                <label>
-                X (Package):
-                <input type="number" step="0.001" value={xPackage} required onChange={(e) => setXPackage(parseFloat(e.target.value))} />
-                </label>
+                <input placeholder='Wysokość' className="deactivateaccount-password" type="number" step="0.001" value={xPackage} required onChange={(e) => setXPackage(parseFloat(e.target.value))} />
 
-                <label>
-                Y (Package):
-                <input type="number" step="0.001" value={yPackage} required onChange={(e) => setYPackage(parseFloat(e.target.value))} />
-                </label>
+                <input placeholder='Szerokość' className="deactivateaccount-password" type="number" step="0.001" value={yPackage} required onChange={(e) => setYPackage(parseFloat(e.target.value))} />
 
-                <label>
-                Z (Package):
-                <input type="number" step="0.001" value={zPackage} required onChange={(e) => setZPackage(parseFloat(e.target.value))} />
-                </label>
+                <input placeholder='Długość' className="deactivateaccount-password" type="number" step="0.001" value={zPackage} required onChange={(e) => setZPackage(parseFloat(e.target.value))} />
 
-                <label>
-                Mass:
-                <input type="number" value={mass} required onChange={(e) => setMass(parseFloat(e.target.value))} />
-                </label>
+                <input placeholder='Masa' className="deactivateaccount-password" type="number" value={mass} required onChange={(e) => setMass(parseFloat(e.target.value))} />
+                
 
-                <label>
-                Stackable:
+                <input placeholder='Ilość' className="deactivateaccount-password" type="number" value={count} required onChange={(e) => setCount(parseInt(e.target.value, 10))} />
+                <label class="toggler-wrapper style-1">
+                Czy można sztaplować?:
                 <input type="checkbox" checked={stackable} onChange={() => setStackable(!stackable)} />
+                <div class="toggler-slider">
+                    <div class="toggler-knob"></div>
+                </div>
                 </label>
+                </div></fieldset>
 
-                <label>
-                Count:
-                <input type="number" value={count} required onChange={(e) => setCount(parseInt(e.target.value, 10))} />
-                </label>
-                </fieldset>
-
-                <button type="button" onClick={handleConfirmClick}>
+                </div>
+                
+                <button className="deactivateaccount-submit" type="button" onClick={handleConfirmClick}>
                 Potwierdz
                 </button>
             </form>
+            </div>
 			{message && <div className='message'>{message}</div>}
         </div>
     );
