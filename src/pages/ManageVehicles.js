@@ -7,6 +7,9 @@ import Cookies from 'js-cookie';
 function ManageVehicles(){
     const {marginLeft} = useMargin();
     const [data, setData] = useState([]);
+    const [name, setName] = useState("");
+    const [vehicle, setVehicle] = useState("");
+    const [trailer, setTrailer] = useState("");
     const address = '';
     const role = Cookies.get('userRole');
 
@@ -51,6 +54,33 @@ function ManageVehicles(){
                     <button className='deactivateaccount-submit' onClick={handleAddVehicleButton}>Dodaj pojazd</button>
                     <button className='deactivateaccount-submit' onClick={handleAddTrailerButton}>Dodaj naczepę</button>
                 </div>
+                <div className='managevehicles-locate'>
+                    <select className='deactivateaccount-submit' value={name} onChange={(e) => setName(e.target.value)}>
+                    <option value="">Imię</option>
+                    {data.map((item, index) => (
+                        <option key={index} value={item.name}>
+                        {item.name}
+                        </option>
+                    ))}
+                    </select>
+                    <select className='deactivateaccount-submit' value={vehicle} onChange={(e) => setVehicle(e.target.value)}>
+                    <option value="">Pojazd</option>
+                    {data.map((item, index) => (
+                        <option key={index} value={item.vehicle}>
+                        {item.vehicle}
+                        </option>
+                    ))}
+                    </select>
+                    <select className='deactivateaccount-submit' value={trailer} onChange={(e) => setTrailer(e.target.value)}>
+                    <option value="">Naczepa</option>
+                    {data.map((item, index) => (
+                        <option key={index} value={item.trailer}>
+                        {item.trailer}
+                        </option>
+                    ))}
+                    </select>
+                </div>
+
                 <div className="commissionshistory-table-container">
                     <table className="commissionshistory-table">
                         <thead>
