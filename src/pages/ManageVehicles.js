@@ -11,11 +11,38 @@ function ManageVehicles(){
     const [vehicle, setVehicle] = useState("");
     const [trailer, setTrailer] = useState("");
     const address = '';
+    const addressSending = "";
     const role = Cookies.get('userRole');
+    const token = localStorage.getItem('token');
+
+    const handleCreatingRide = async () => {
+        try {
+            const response = await fetch (addressSending, {
+                method: 'POST',
+                header: {
+                    'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                },
+                body: JSON.stringify({name, vehicle, trailer}),
+            });
+
+            if(response.ok){
+                alert('Pomyślnie stworzono zespół!');
+            } else {
+                alert('Wystąpił błąd');
+            }
+        } catch (error) {
+            console.error('Error: ', error);
+        }
+        
+        setName("");
+        setTrailer("");
+        setVehicle("");
+    };
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem('token');
+
 
             try {
                 const respone = await fetch(address, {
@@ -55,7 +82,7 @@ function ManageVehicles(){
                     <button className='deactivateaccount-submit' onClick={handleAddTrailerButton}>Dodaj naczepę</button>
                 </div>
                 <div className='managevehicles-locate'>
-                    <select className='deactivateaccount-submit' value={name} onChange={(e) => setName(e.target.value)}>
+                    <select className='deactivateaccount-password' value={name} onChange={(e) => setName(e.target.value)}>
                     <option value="">Imię</option>
                     {data.map((item, index) => (
                         <option key={index} value={item.name}>
@@ -63,7 +90,7 @@ function ManageVehicles(){
                         </option>
                     ))}
                     </select>
-                    <select className='deactivateaccount-submit' value={vehicle} onChange={(e) => setVehicle(e.target.value)}>
+                    <select className='deactivateaccount-password' value={vehicle} onChange={(e) => setVehicle(e.target.value)}>
                     <option value="">Pojazd</option>
                     {data.map((item, index) => (
                         <option key={index} value={item.vehicle}>
@@ -71,7 +98,7 @@ function ManageVehicles(){
                         </option>
                     ))}
                     </select>
-                    <select className='deactivateaccount-submit' value={trailer} onChange={(e) => setTrailer(e.target.value)}>
+                    <select className='deactivateaccount-password' value={trailer} onChange={(e) => setTrailer(e.target.value)}>
                     <option value="">Naczepa</option>
                     {data.map((item, index) => (
                         <option key={index} value={item.trailer}>
@@ -79,6 +106,9 @@ function ManageVehicles(){
                         </option>
                     ))}
                     </select>
+                </div>
+                <div className='managevehicles-locate'>
+                    <button className='deactivateaccount-submit' onClick={handleCreatingRide}>Dodaj</button>
                 </div>
 
                 <div className="commissionshistory-table-container">

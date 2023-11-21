@@ -55,7 +55,7 @@ function AnnounceRide(){
           driver: "",
           description: "",
         });
-      };
+    };
 
     useEffect(() => {
         const fetchData = async () => {
