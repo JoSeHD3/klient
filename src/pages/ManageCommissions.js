@@ -15,7 +15,7 @@ function ManageCommissions(){
     return(
         <div className="site-first-div" style={{marginLeft}}>
             <NavButton routes={[{route: '/pages/Home', name: 'Strona główna'},{route: '/pages/Company', name: 'Firma'}, {route: '/pages/Company/ManageCommissions', name: 'Zarządzaj zleceniami'}]}/>
-            {(role === 'manager' || role === 'logistyk') ? 
+            {(role === 'manager' || role === 'logistician') ? 
             <div className='profileButtonBox'>
                 <button className="profileButton" onClick={() => handleClick('/pages/Company/RoutesList')}>Lista przejazdów</button>
                 <button className="profileButton" onClick={() => handleClick('/pages/Company/AnnounceRide')}>Ogłoś przejazd</button>

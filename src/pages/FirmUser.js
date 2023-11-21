@@ -13,9 +13,8 @@ function FirmUser(){
                 method: 'POST',
                 header: {
                     'Content-Type': 'application/json',
-                    'Authorization' : `Bearer ${token}`
                 },
-                body: JSON.stringify({companyName, nip}),
+                body: JSON.stringify({token, companyName, nip}),
             });
 
             if(response.ok){

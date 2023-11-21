@@ -10,7 +10,7 @@ function AddVehicle(){
     const [model, setModel] = useState();
     const [mass, setMass] = useState();
     const [licensePlate, setLicensePlate] = useState();
-    const address = "";
+    const address = 'http://127.0.0.1:8086/addTruck';
     const token = localStorage.getItem('token');
     const role = Cookies.get('userRole');
 
@@ -19,9 +19,9 @@ function AddVehicle(){
         try {
             const response = await fetch (address, {
                 method: 'POST',
-                header: {
+                headers: {
                     'Content-Type': 'application/json',
-                    'Authorization' : `Bearer ${token}`
+					'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({model, mass, licensePlate}),
             });
@@ -38,7 +38,7 @@ function AddVehicle(){
     return(
         <div className="site-first-div" style={{marginLeft}}>
             <NavButton routes={[{route: '/pages/Home', name: 'Strona główna'}, {route: '/pages/Company', name: 'Firma'}, {route: '/pages/Company/ManageVehicles', name: 'Zarządzaj pojazdami'}, {route: '/pages/Company/AddVehicle', name: 'Dodaj Pojazd'}]}/>
-            {(role === 'manager' || role === 'logistyk') ? 
+            {(role === 'manager' || role === 'logistician') ? 
             <div className='firmuser-locate'>
                 <form onSubmit={handleSubmit} className='deactivateaccount-form'>
                     <input className='deactivateaccount-password' type='text' required placeholder='MODEL' onChange={e => setModel(e.target.value)}></input>

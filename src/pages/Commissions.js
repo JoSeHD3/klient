@@ -25,10 +25,12 @@ function Commissions(){
     const [count, setCount] = useState();
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+	
+	const [message, setMessage] = useState();
 
     const {marginLeft} = useMargin();
 
-    const address = "";
+    const address = "http://127.0.0.1:8086/commissionCreate";
     const token = localStorage.getItem('token');
     const role = Cookies.get('userRole');
 
@@ -59,7 +61,7 @@ function Commissions(){
     
         try {
             const response = await fetch(address, {
-                method: "GET",
+                method: "POST",
                 headers: {
                     'Content-Type' : 'application/json', 
                     'Authorization' : 'Bearer ' + token
@@ -67,6 +69,7 @@ function Commissions(){
                 body: JSON.stringify({data: dataToSend}),
             });
             if(response.ok) {
+				setMessage("Pomyślnie dodano paczke");
                 const data = await response.json();
             } else {
                 console.error("SearchCargo: send error", response.statusText);
@@ -106,10 +109,6 @@ function Commissions(){
                 Adres:
                 <input type="text" value={addressStart} onChange={(e) => setAddressStart(e.target.value)} />
                 </label>
-                <label>
-                Data:
-                <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                </label>
                 </fieldset>
                 <fieldset>
                 <legend>Punkt koncowy</legend>
@@ -137,10 +136,6 @@ function Commissions(){
                 Adres:
                 <input type="text" value={addressEnd} onChange={(e) => setAddressEnd(e.target.value)} />
                 </label>
-                <label>
-                Data:
-                <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                </label>
                 </fieldset>
 
                 <fieldset>
@@ -153,22 +148,22 @@ function Commissions(){
 
                 <label>
                 X (Package):
-                <input type="number" step="0.001" value={xPackage} onChange={(e) => setXPackage(parseFloat(e.target.value))} />
+                <input type="number" step="0.001" value={xPackage} required onChange={(e) => setXPackage(parseFloat(e.target.value))} />
                 </label>
 
                 <label>
                 Y (Package):
-                <input type="number" step="0.001" value={yPackage} onChange={(e) => setYPackage(parseFloat(e.target.value))} />
+                <input type="number" step="0.001" value={yPackage} required onChange={(e) => setYPackage(parseFloat(e.target.value))} />
                 </label>
 
                 <label>
                 Z (Package):
-                <input type="number" step="0.001" value={zPackage} onChange={(e) => setZPackage(parseFloat(e.target.value))} />
+                <input type="number" step="0.001" value={zPackage} required onChange={(e) => setZPackage(parseFloat(e.target.value))} />
                 </label>
 
                 <label>
                 Mass:
-                <input type="number" value={mass} onChange={(e) => setMass(parseFloat(e.target.value))} />
+                <input type="number" value={mass} required onChange={(e) => setMass(parseFloat(e.target.value))} />
                 </label>
 
                 <label>
@@ -178,7 +173,7 @@ function Commissions(){
 
                 <label>
                 Count:
-                <input type="number" value={count} onChange={(e) => setCount(parseInt(e.target.value, 10))} />
+                <input type="number" value={count} required onChange={(e) => setCount(parseInt(e.target.value, 10))} />
                 </label>
                 </fieldset>
 
@@ -186,6 +181,7 @@ function Commissions(){
                 Potwierdz
                 </button>
             </form>
+			{message && <div className='message'>{message}</div>}
         </div>
     );
 }

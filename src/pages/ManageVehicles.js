@@ -7,62 +7,159 @@ import Cookies from 'js-cookie';
 function ManageVehicles(){
     const {marginLeft} = useMargin();
     const [data, setData] = useState([]);
-    const [name, setName] = useState("");
-    const [vehicle, setVehicle] = useState("");
-    const [trailer, setTrailer] = useState("");
+    const [user_id, setName] = useState("");
+    const [truck_id, setVehicle] = useState("");
+    const [trailer_id, setTrailer] = useState("");
     const address = '';
-    const addressSending = "";
+	
+    const addressBind = "http://127.0.0.1:8086/bindDriverTruckTrailer";
+	
+	const addressDriver = 'http://127.0.0.1:8086/getUnbindedDrivers';
+	const addressTruck = 'http://127.0.0.1:8086/getTrucks';
+	const addressTrailer = 'http://127.0.0.1:8086/getTrailers';
+
+	const addressGetBidned = 'http://127.0.0.1:8086/companyGetBindedDrivers';
+
+	const addressUnbind = 'http://127.0.0.1:8086/unbindDriverTruckTrailer';
+
+
+	
     const role = Cookies.get('userRole');
     const token = localStorage.getItem('token');
+	
+	
+	
+	const [drivers, setDrivers] = useState([]);
+    const [trucks, setTrucks] = useState([]);
+    const [trailers, setTrailers] = useState([]);
+
+    const [binded, setBinded] = useState([]);
+	
 
     const handleCreatingRide = async () => {
-        try {
-            const response = await fetch (addressSending, {
-                method: 'POST',
-                header: {
-                    'Content-Type': 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                },
-                body: JSON.stringify({name, vehicle, trailer}),
-            });
+    try {
+        const response = await fetch(addressBind, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                user_id: user_id, 
+                truck_id: truck_id,
+                trailer_id: trailer_id
+            }),
+        });
 
-            if(response.ok){
-                alert('Pomyślnie stworzono zespół!');
-            } else {
-                alert('Wystąpił błąd');
-            }
-        } catch (error) {
-            console.error('Error: ', error);
+        if (response.ok) {
+            alert('Pomyślnie stworzono zespół!');
+        } else {
+            alert('Wystąpił błąd');
         }
+    } catch (error) {
+        console.error('Error: ', error);
+    }
         
         setName("");
         setTrailer("");
         setVehicle("");
     };
 
-    useEffect(() => {
+
+	//pobierz dane
+ useEffect(() => {
         const fetchData = async () => {
-
-
             try {
-                const respone = await fetch(address, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization' : `Bearer ${token}`
-                    },
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                };
+
+                const driversResponse = await fetch(addressDriver, {
+                    method: 'GET',
+                    headers: headers,
                 });
+                const driversData = await driversResponse.json();
+                setDrivers(driversData);
 
-                const res = await respone.json();
+                const trucksResponse = await fetch(addressTruck, {
+                    method: 'GET',
+                    headers: headers,
+                });
+                const trucksData = await trucksResponse.json();
+                setTrucks(trucksData);
 
-                setData(res);
-            } catch(error) {
+                const trailersResponse = await fetch(addressTrailer, {
+                    method: 'GET',
+                    headers: headers,
+                });
+                const trailersData = await trailersResponse.json();
+                setTrailers(trailersData);
+            } catch (error) {
                 console.error('Error: ', error);
             }
         };
 
         fetchData();
     }, []);
+
+
+
+ useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                };
+
+                const bindedResponse = await fetch(addressGetBidned, {
+                    method: 'GET',
+                    headers: headers,
+                });
+
+                const bindedData = await bindedResponse.json();
+                setBinded(bindedData);
+
+
+
+            } catch (error) {
+                console.error('Error: ', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+	
+
+
+    const handleDeleteBind = async (bind) => {
+        try {
+            const response = await fetch(addressUnbind, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+					'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+					user_id: bind.user_id,
+					truck_id: bind.truck_id,
+					trailer_id: bind.trailer_id,
+
+				})
+            });
+
+            if(response.ok){
+                alert("Pomyślnie usunięto powiązanie");
+            } else {
+                alert("Wystąpił błąd");
+                console.error("deleting user error", response.statusText);
+            }
+        } catch (error) {console.error(error);}
+    }
+
+
+
 
     const handleAddTrailerButton = () => {
         window.location.href = "/pages/Company/AddTrailer";
@@ -82,27 +179,27 @@ function ManageVehicles(){
                     <button className='deactivateaccount-submit' onClick={handleAddTrailerButton}>Dodaj naczepę</button>
                 </div>
                 <div className='managevehicles-locate'>
-                    <select className='deactivateaccount-password' value={name} onChange={(e) => setName(e.target.value)}>
+                    <select className='deactivateaccount-password' value={user_id} onChange={(e) => setName(e.target.value)}>
                     <option value="">Imię</option>
-                    {data.map((item, index) => (
-                        <option key={index} value={item.name}>
+                    {drivers.map((item, index) => (
+                        <option key={index} value={item.user_id}>
                         {item.name}
                         </option>
                     ))}
                     </select>
-                    <select className='deactivateaccount-password' value={vehicle} onChange={(e) => setVehicle(e.target.value)}>
+                    <select className='deactivateaccount-password' value={truck_id} onChange={(e) => setVehicle(e.target.value)}>
                     <option value="">Pojazd</option>
-                    {data.map((item, index) => (
-                        <option key={index} value={item.vehicle}>
-                        {item.vehicle}
+                    {trucks.map((item, index) => (
+                        <option key={index} value={item.truck_id}>
+                        {item.model + " " +item.registration_number}
                         </option>
                     ))}
                     </select>
-                    <select className='deactivateaccount-password' value={trailer} onChange={(e) => setTrailer(e.target.value)}>
+                    <select className='deactivateaccount-password' value={trailer_id} onChange={(e) => setTrailer(e.target.value)}>
                     <option value="">Naczepa</option>
-                    {data.map((item, index) => (
-                        <option key={index} value={item.trailer}>
-                        {item.trailer}
+                    {trailers.map((item, index) => (
+                        <option key={index} value={item.trailer_id}>
+                        {item.description}
                         </option>
                     ))}
                     </select>
@@ -115,19 +212,21 @@ function ManageVehicles(){
                     <table className="commissionshistory-table">
                         <thead>
                             <tr>
-                                <th>Pojazd</th>
                                 <th>Kierowca</th>
+                                <th>Pojazd</th>
                                 <th>Naczepa</th>
+                                <th>Usun</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map((item, index)=> {
+                            {binded.map((item, index)=> (
                                 <tr key={index}>
-                                    <td>{item.vehicle}</td>
-                                    <td>{item.driver}</td>
-                                    <td>{item.trailer}</td>
+                                    <td>{item.userName}</td>
+                                    <td>{item.truckModel + " " + item.truckReg}</td>
+                                    <td>{item.trailerDesc}</td>
+                                    <td><button onClick={() => handleDeleteBind(item)}>-</button></td>
                                 </tr>
-                            })}
+                            ))}
                         </tbody>
                     </table>
                 </div>

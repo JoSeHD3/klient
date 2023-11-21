@@ -9,8 +9,8 @@ function ManageEmployees(){
 
     const addressA = 'http://127.0.0.1:8086/companyAddUser';
     const addressB = 'http://127.0.0.1:8086/companyGetUsers';
-    const addressC = '';
-    const addressD = '';
+    const addressC = 'http://127.0.0.1:8086/companyUserSetRole';
+    const addressD = 'http://127.0.0.1:8086/companyDeleteUser';
     const token = localStorage.getItem('token');
     const role = Cookies.get('userRole');
 
@@ -28,7 +28,7 @@ function ManageEmployees(){
                 method: "GET",
                 headers: {
                     'Content-Type' : 'application/json', 
-                    'Authorization' : 'Bearer ' + token
+                    'Authorization': `Bearer ${token}`
                 }
             });
             if(response.ok) {
@@ -50,7 +50,7 @@ function ManageEmployees(){
                 method: "POST",
                 headers: {
                     'Content-Type' : 'application/json', 
-                    'Authorization' : 'Bearer '+ token
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({login})
             });
@@ -71,9 +71,9 @@ function ManageEmployees(){
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json',
-                    'Authorization' : 'Bearer ' + token
+					'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({name: employee.name, surname: employee.surname, role: newRole}),
+                body: JSON.stringify({login: employee.login, role: newRole}),
             });
 
             if(response.ok){
@@ -92,9 +92,9 @@ function ManageEmployees(){
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization' : 'Bearer ' + token
+					'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({name: employee.name, surname: employee.surname})
+                body: JSON.stringify({login: employee.login})
             });
 
             if(response.ok){
@@ -131,15 +131,25 @@ function ManageEmployees(){
 									<td>{employee.name}</td>
 									<td>{employee.surname}</td>
 									<td>
+									
+									{employee.role == "Wlasciciel" ? 'Właściciel' :
 										<select
 											value={employee.role}
 											onChange={(e) => handleRoleChange(employee, e.target.value)}
 										>
-											<option value="logistyk">Logistyk</option>
-											<option value="pracownik">Pracownik</option>
-											<option value="manager">Menadżer</option>
+											<option value="Logistyk">Logistyk</option>
+											<option value="Kierowca">Kierowca</option>
+											<option value="Menadzer">Menadżer</option>
+											<option value="Uzytkownik">Pracownik</option>
 										</select>
+										
+									}
+									{employee.role == "Wlasciciel" ? '' :
+	
 										<button onClick={() => handleDeleteUser(employee)}>-</button>
+									}
+										
+										
 									</td>
 								</tr>
 							))}

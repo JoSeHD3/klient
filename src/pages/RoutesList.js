@@ -6,7 +6,7 @@ import {useMargin} from '../components/MarginContext';
 function RoutesList(){
     const {marginLeft} = useMargin();
     const [data, setData] = useState([]);
-    const address = '';
+    const address = 'http://127.0.0.1:8086/getRoutes';
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,7 +14,7 @@ function RoutesList(){
 
             try {
                 const respone = await fetch(address, {
-                    method: 'POST',
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization' : `Bearer ${token}`
@@ -41,17 +41,17 @@ function RoutesList(){
                         <tr>
                             <th>ID</th>
                             <th>Nazwa przejazdu</th>
-                            <th>Status</th>
+                            <th>Data</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(item => {
+                        {data.map(item => (
                             <tr key={item.id}>
                                 <td>{item.id}</td>
                                 <td>{item.name}</td>
-                                <td>{item.status}</td>
+                                <td>{item.data}</td>
                             </tr>
-                        })}
+                        ))}
                     </tbody>
                 </table>
             </div>
