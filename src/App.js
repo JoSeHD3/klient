@@ -42,35 +42,6 @@ const addressRole = 'http://127.0.0.1:8086/userRole';
 
     Cookies.set('userRole', 'manager', {secure: true, sameSite: 'strict'});
 
-    
-    /*useEffect(() => {
-        const fetch = async () => {
-            if(token && updateUser === true) {
-                try {
-                    const response = await fetch(addressRole, {
-                        headers: {
-                            Authorization: token,
-                        },
-                    });
-                    if(response.ok){
-                        const data = await response.json();
-                        Cookies.set('userRole', data.role, {secure: true, sameSite: 'strict'});
-                        setUpdateUser(false);
-                    } else {
-                        console.error("Role fetching error: ", response.statusText);
-                    }
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-        }
-
-        fetch();
-    }, [token, updateUser]);      
-*/
-
-
-
     return (
         <div className="app">
             <MarginProvider>
