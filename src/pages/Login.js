@@ -25,14 +25,19 @@ function Login(){
             loginUsername,
             loginPassword
         });
-        if('token' in response) {
+		if(response.cancaled == false)
+		{
             localStorage.setItem("token", response['token']);
             //localStorage.setItem('user', JSON.stringify(response['user']));
             window.location.href = "/pages/home";
             setIsSubmitted(true);
-        } else {
+        } else if(response.cancaled == true){
+			alert("Konto nieaktywne");
             console.log("Server response error");
-            window.location.href = "/pages/ErrorSite";
+		} 
+		else {
+            alert("Nieprawidłowe dane logowania");
+            console.log("Server response error");
         }
     }
 

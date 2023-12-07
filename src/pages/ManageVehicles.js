@@ -10,6 +10,7 @@ function ManageVehicles(){
     const [user_id, setName] = useState("");
     const [truck_id, setVehicle] = useState("");
     const [trailer_id, setTrailer] = useState("");
+    const [shouldRefresh, setShouldRefresh] = useState(true);
     const address = '';
 	
     const addressBind = "http://127.0.0.1:8086/bindDriverTruckTrailer";
@@ -53,6 +54,8 @@ function ManageVehicles(){
 
         if (response.ok) {
             alert('Pomyślnie stworzono zespół!');
+			window.location.reload();
+            setShouldRefresh(!shouldRefresh);
         } else {
             alert('Wystąpił błąd');
         }
@@ -101,7 +104,7 @@ function ManageVehicles(){
         };
 
         fetchData();
-    }, []);
+    }, [shouldRefresh]);
 
 
 
@@ -151,8 +154,10 @@ function ManageVehicles(){
 
             if(response.ok){
                 alert("Pomyślnie usunięto powiązanie");
+                setShouldRefresh(!shouldRefresh);
+                window.location.reload();
             } else {
-                alert("Wystąpił błąd");
+                alert("Ten kierowca ma niezakończoną trasę");
                 console.error("deleting user error", response.statusText);
             }
         } catch (error) {console.error(error);}

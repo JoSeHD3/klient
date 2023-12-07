@@ -3,7 +3,8 @@ import React, {useState, useEffect} from 'react';
 import NavButton from '../components/NavButton';
 import {useMargin} from '../components/MarginContext';
 import Cookies from 'js-cookie';
-
+import { Link } from 'react-router-dom'; 
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 function SearchCargo(){
     const [routes, setRoutes] = useState([]);
     const [vehicles, setVehicles] = useState([]);
@@ -11,6 +12,13 @@ function SearchCargo(){
     const [selectedRoute, setSelectedRoute] = useState('');
     const [selectedVehicle, setSelectedVehicle] = useState('');
     const [selectedPackages, setSelectedPackages] = useState([]);
+    const [shouldRefresh, setShouldRefresh] = useState(true);
+
+    const samplePackages = [
+        { commission_id: 101, description: 'Package 101' },
+        { commission_id: 102, description: 'Package 102' },
+        { commission_id: 103, description: 'Package 103' },
+      ];
 
     const {marginLeft} = useMargin();
 
@@ -23,7 +31,7 @@ function SearchCargo(){
     useEffect(() => {
         fetchData();
         fetchData2();
-    }, []);
+    }, [shouldRefresh]);
 //http://127.0.0.1:8086/getCommissions"
     const fetchData = async () => {
         try {
@@ -43,6 +51,7 @@ function SearchCargo(){
         } catch (error){
             console.error(error);
         }
+        setPackages(samplePackages);
     };
 
 
@@ -96,6 +105,8 @@ function SearchCargo(){
             });
             if(response.ok) {
                 const data = await response.json();
+                alert("Pomyślnie zmieniono dane!");
+                setShouldRefresh(!shouldRefresh);
             } else {
                 console.error("SearchCargo: send error", response.statusText);
             }
@@ -109,6 +120,15 @@ function SearchCargo(){
         setSelectedPackages(updatedPackages);
     }
 
+    const DragAndDropHandle = (droppedItem) => {
+        if (!droppedItem.destination) return;
+
+        const updatedList = [...packageData];
+        const [movedItem] = updatedList.splice(droppedItem.source.index, 1);
+        updatedList.splice(droppedItem.destination.index, 0, movedItem);
+    
+        setPackages(updatedList);
+    }
 
     return(
         <div className="site-first-div" style={{marginLeft}}>
@@ -134,30 +154,52 @@ function SearchCargo(){
                     </select>
                 <button className="deactivateaccount-submit" onClick={handleAddButtonClick}>Dodaj</button>
                 <p />
-                    <table className="commissionshistory-table">
-                        <thead>
-                            <tr>
-                                <th>ID paczki</th>
-                                <th>Nazwa</th>
-                                <th>Zaznacz</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {packageData.map(packageItem => (
-                                <tr key={packageItem.commission_id}>
-                                    <td>{packageItem.commission_id}</td>
-                                    <td>{packageItem.description}</td>
-                                    <td>
-                                        <input 
-                                            type="checkbox"
-                                            checked={selectedPackages.includes(packageItem.commission_id)}
-                                            onChange={() => handlePackageCheckboxChange(packageItem.commission_id)}
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+
+                            <table className="commissionshistory-table" >
+                                <thead>
+                                    <tr>
+                                        <th>ID paczki</th>
+                                        <th>Nazwa</th>
+                                        <th>Zaznacz</th>
+                                    </tr>
+                                </thead>
+                                <DragDropContext onDragEnd={DragAndDropHandle}>
+                                <Droppable droppableId='droppable'>
+                                    {(provided) => (
+                                        <tbody {...provided.droppableProps} ref={provided.innerRef} className='droppable'>
+                                            {packageData.map((packageItem, index) => (
+                                                <Draggable key={packageItem} draggableId={packageItem} index={index}>
+                                                    {(provided) => (
+                                                        <tr
+                                                            ref={provided.innerRef}
+                                                            {...provided.dragHandleProps}
+                                                            {...provided.draggableProps}
+                                                        >
+                                                            <td>{packageItem.commission_id}</td>
+                                                            <td>
+                                                                <a href={`/pages/Company/SearchCargo/SearchCargoDetails/${packageItem.commission_id}`} target="_blank" rel="noopener noreferrer">
+                                                                    {packageItem.description}
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <input
+                                                                    type="checkbox"
+                                                                    checked={selectedPackages.includes(packageItem.commission_id)}
+                                                                    onChange={() => handlePackageCheckboxChange(packageItem.commission_id)}
+                                                                />
+                                                            </td>
+                                                        </tr>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </tbody>
+                                    )}
+                                </Droppable>
+                                    </DragDropContext>
+                                                      
+                            </table>
+
                 </div>
             
             : '' }

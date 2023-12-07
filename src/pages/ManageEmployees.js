@@ -17,10 +17,11 @@ function ManageEmployees(){
     const [login, setLogin] = useState();
     const [employees, setEmployees] = useState([]);
     const [selectedRole, setSelectedRole] = useState();
+    const [shouldRefresh, setShouldRefresh] = useState(true);
 
     useEffect(() => {
         fetchEmployees();
-    }, []);
+    }, [shouldRefresh]);
 
     const fetchEmployees = async () => {
         try {
@@ -56,6 +57,7 @@ function ManageEmployees(){
             });
             if(reponse.ok ){
                 alert("Pomyślnie dodano użytkownika do firmy");
+                setShouldRefresh(!shouldRefresh);
             }
             else {
                 alert("Wystąpił błąd");
@@ -78,7 +80,9 @@ function ManageEmployees(){
 
             if(response.ok){
                 alert('Pomyślnie zmieniono rolę użytkownika');
+                setShouldRefresh(!shouldRefresh);
             } else {
+				alert('Ten użytkownik ma istniejące powiązanie');
                 console.error('role change not completed successfully ');
             }
         } catch(error){
@@ -100,6 +104,7 @@ function ManageEmployees(){
             if(response.ok){
                 alert("Pomyślnie usunięto użytkownika z firmy");
                 fetchEmployees();
+                setShouldRefresh(!shouldRefresh);
             } else {
                 alert("Wystąpił błąd");
                 console.error("deleting user error", response.statusText);

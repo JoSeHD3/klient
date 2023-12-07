@@ -4,7 +4,7 @@ import NavButton from '../components/NavButton';
 import {useMargin} from '../components/MarginContext';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import { Link } from 'react-router-dom'; 
 const address = 'http://127.0.0.1:8086/getUserCommissions';
 
 function CommissionsHistory(){
@@ -50,9 +50,13 @@ function CommissionsHistory(){
                         {data.map(item => (
                             <tr key={item.id}>
                                 <td>{item.commission_id}</td>
-                                <td>{item.description}</td>
                                 <td>
-									{item.is_unloaded && !item.is_loaded ? 'zakończone' :
+								    <Link to={`/pages/Profile/CommissionsHistory/CommissionsDetails/${item.commission_id}`}>
+                                        {item.description}
+                                    </Link>
+								</td>
+                                <td>
+									{item.canceled == 1 ? "Anulowano paczkę" :item.is_selected == true ? 'Dodana do przejazdu' : item.is_unloaded && item.is_loaded ? 'zakończone' :
 									!item.is_unloaded && item.is_loaded ? 'w podróży' :
 									'oczekujące'}
 								</td>

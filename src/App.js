@@ -11,10 +11,12 @@ import ErrorSite from './pages/ErrorSite';
 import Profile from './pages/Profile';
 import ChangeData from './pages/ChangeData';
 import CommissionsHistory from './pages/CommissionsHistory';
+import CommissionsDetails from './pages/CommissionsDetails';
 import DeactivateAccount from './pages/DeactivateAccount';
 import "./components/Fontawesome";
 import Sidebar from './components/Sidebar';
 import {MarginProvider} from './components/MarginContext';
+import LogoutButton from './components/LogoutButton';
 import Firm from './pages/Firm';
 import DeleteCompany from './pages/DeleteCompany';
 import ManageCommissions from './pages/ManageCommissions';
@@ -25,18 +27,23 @@ import AddVehicle from './pages/AddVehicle';
 import RoutesList from './pages/RoutesList';
 import AnnounceRide from './pages/AnnounceRide';
 import SearchCargo from './pages/SearchCargo';
+import SearchCargoDetails from './pages/SearchCargoDetails';
 import Commissions from './pages/Commissions';
+import RouteDetails from './pages/RouteDetails';
+
 
 function App() {
     //const token = localStorage.getItem('token');
     const token = ".";
-    const addressRole = "";
+	
+const addressRole = 'http://127.0.0.1:8086/userRole';
+
     const [updateUser, setUpdateUser] = useState(true);    //hook for forcing app to change user's role without reloading site
 
     Cookies.set('userRole', 'manager', {secure: true, sameSite: 'strict'});
 
-    /*
-    useEffect(() => {
+    
+    /*useEffect(() => {
         const fetch = async () => {
             if(token && updateUser === true) {
                 try {
@@ -59,7 +66,10 @@ function App() {
         }
 
         fetch();
-    }, [token, updateUser]);        //hook for changing role depending of token or updateUser bool value */
+    }, [token, updateUser]);      
+*/
+
+
 
     return (
         <div className="app">
@@ -78,6 +88,7 @@ function App() {
                                     <Route path="/pages/profile" element={token ? <Profile /> : <Login />} />
                                     <Route path="/pages/profile/changedata" element={token ? <ChangeData /> : <Login />} />
                                     <Route path="/pages/profile/commissionshistory" element={token ? <CommissionsHistory /> : <Login />} />
+									<Route path="/pages/profile/commissionshistory/commissionsdetails/:commissionId" element={token ? <CommissionsDetails /> : <Login />} />
                                     <Route path="/pages/profile/deactivateaccount" element={token ? <DeactivateAccount /> : <Login />} />
                                     <Route path="/pages/company" element={token ? <Firm /> : <Login />} />
                                     <Route path="/pages/company/deletecompany" element={token ? <DeleteCompany /> : <Login />} />
@@ -87,8 +98,10 @@ function App() {
                                     <Route path="/pages/company/addvehicle" element={token ? <AddVehicle /> : <Login />} />
                                     <Route path="/pages/company/addtrailer" element={token ? <AddTrailer /> : <Login />} />
                                     <Route path="/pages/company/routeslist" element={token ? <RoutesList /> : <Login />} />
+                                    <Route path="/pages/company/routeslist/routedetails/:routeId" element={token ? <RouteDetails /> : <Login />} />
                                     <Route path="/pages/company/announceride" element={token ? <AnnounceRide /> : <Login />} />
                                     <Route path="/pages/company/searchcargo" element={token ? <SearchCargo /> : <Login />} />
+                                    <Route path="/pages/company/searchcargo/searchcargodetails/:commissionId" element={token ? <SearchCargoDetails /> : <Login />} />
                                     <Route path="/pages/commision" element={token ? <Commissions /> : <Login />} />
 
                                     <Route path="*" element={<ErrorSite />}/>
@@ -99,6 +112,7 @@ function App() {
                 </Routes>
             </Router>
             </MarginProvider>
+            {token ? <LogoutButton /> : "" }
         </div>
     );
 }
