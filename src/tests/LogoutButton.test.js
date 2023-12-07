@@ -18,3 +18,4 @@ describe("LogoutButton component", () => {
         expect(buttonElement).toHaveStyle("background-color: #555555");
     });
 });
+

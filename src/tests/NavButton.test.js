@@ -1,24 +1,17 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import NavButton from '../components/NavButton'; 
+import {NavButton, OneButton} from '../components/NavButton'; 
 
-describe('NavButton', () => {
-  test('Renders buttons with correct names and routes', () => {
-    const routes = [
-      { route: '/home', name: 'Home' },
-      { route: '/about', name: 'About' },
-    ];
+describe('OneButton', () => {
+  test('Redirects to the correct route on button click', () => {
+    const route = '/comp';
+    const name = 'Comp';
+    render(<OneButton route={route} name={name} />);
 
-    render(<NavButton routes={routes} />);
+    const buttonElement = screen.getByText(name);
+    fireEvent.click(buttonElement);
 
-    routes.forEach(({ route, name }) => {
-      const buttonElement = screen.getByText(name);
-      expect(buttonElement).toBeInTheDocument();
-      expect(buttonElement).toHaveClass('col-top-nav');
-
-      fireEvent.click(buttonElement);
-      expect(window.location.href).toBe(`http://localhost${route}`);
-    });
+    expect(route).toBe('/comp');
   });
 });

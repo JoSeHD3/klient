@@ -1,6 +1,6 @@
 import React from 'react';
 
-function OneButton(props){
+export function OneButton(props){
 
     const handleClick = () => {
         window.location.href = props.route;
